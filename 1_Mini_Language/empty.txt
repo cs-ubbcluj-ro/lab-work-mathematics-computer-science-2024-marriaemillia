@@ -1,0 +1,129 @@
+Lab 1
+Exercise 1. 
+1.	Language Definition 
+a.	Alphabet: 
+i.	Upper case and lower case letters of the English alphabet: 
+'A' …'Z' and 'a' … 'z' 
+ii.	Decimal digits : '0' … '9' 
+iii.	Underline character : '_' 
+b.	Lexic: 
+i.	Special symbols representing: 
+1.	Operators :  
+a.	Arithmetic: '+' , '-' , '*' , '/' , '^', '%', '='   
+b.	Relational : '<', '<=' , '==', '!=' , '>=', '>'  
+c.	Logical : '&&', '||',  '!' 
+2.	Separators : '[' , ']', '{' , '}' , '(' , ')' , ';', ',' , ' ' (space) 
+3.	Reserved words: 'if', 'else', 'int', 'float', 'char', 'const' , 'while', 'bool’, ‘for’, ‘string’,’cin’,’cout’, ‘struct’
+ii.	Identifiers:s 
+Identifier::= L[C] 
+L ::= '_'|Letter 
+C ::= Letter|Digit 
+Letter ::= 'A'|'B'|…|'Z'|'a'|'b'|…|'z'| 
+Digit ::= '0'|'1'|…|'9'| 
+iii.	Constants: 
+1.	Integer Constants: 
+int const ::= ['+'|'-'] Digits 
+Digits ::= Digit|Nonzero-digit Digits 
+Nonzero-digit ::= '1'|'2'|…|'9'| 
+Digit ::= '0'|'1'|…|'9'| 
+2.	Floating Point (Real) Constants: 
+float const ::= ['+'|'-'] Digits '.' Digits 
+Digits ::= Digit|Nonzero-digit Digits 
+Digit ::= '0'|'1'|…|'9'| 
+3.	Character Constants: 
+char const := 'Letter'|'Digit' 
+Letter ::= 'A'|'B'|…|'Z'|'a'|'b'|…|'z'| 
+Digit ::= '0'|'1'|…|'9'| 
+4.	String Constants: 
+string const ::= "String" 
+String ::= C[String] 
+C::= Letter|Digit 
+Letter ::= 'A'|'B'|…|'Z'|'a'|'b'|…|'z'| 
+Digit ::= '0'|'1'|…|'9'| 
+
+
+
+
+
+
+2.	Syntax: 
+
+
+
+a.	Syntactical rules: 
+Program ::= Statement-List 
+Statement-List ::= Statement ";" | Statement ";" Statement-List 
+Statement ::= Declaration | Assignment | If-Statement | While-Statement  
+| Struct-Statement ';' 
+
+Declaration ::= Type Identifier-List ';' | Array-Declaration ';' 
+Array-Declaration ::= Type Identifier '['Dimension']' [','Identifier'['Dimension']'] ';' 
+Type ::= 'int'| 'string' | 'bool' ';' 
+Identifier-List ::= Identifier[',' Identifier] 
+Dimension ::= '[' size ']' | '[' size ']' [ '[' size ']' ] 
+Size ::= Digits 
+Assignment ::= Identifier '=' Expression ';' 
+Expression ::= Expression Operation1 Term | Term 
+Term ::= Term Operation2 Factor | Factor 
+Factor ::= '(' expression ')' | Identifier 
+Operation1 = '+' | '-' 
+Operation2 = '*' | '/'  | '%'  
+IO-Statement ::= "cin(" Identifier ");" | "cout(" Identifier ");" 
+If-Statement ::= "if(" Condition "){" Statement-List "}"  
+["else{" Statement-List "}" ] ";" 
+While-Statement ::= "while(" Condition "){" Statement-List "};" 
+For-Statement ::= "for(" Condition "){" Statement-List "};" 
+Condition ::= Expression Operation3 Expression ';' 
+Operation3 ::=  '<', '<=' , '==', '!=' , '>=', '>' , '&&', '||',  '!' 
+Struct-Statement ::= "struct" identifier '{' Declaration [Declaration] "};" 
+
+Exercise 2. 
+ 
+a) Determine if a positive number n given as input is prime or composite. 
+ 
+int n; 
+cin(n); 
+if (n<=1)   { 
+
+cout("Neither");  }
+
+else { 
+int i, ok; 
+ok = 1; 
+i = 2; 
+
+while( i < n )    { 
+
+if( n % i == 0 )   { 
+
+ok = 0; 
+}; 
+i  = i+1; 
+}; 
+
+if(ok==1){ 
+cout ("Prime"); 
+} else
+{ 
+cout ("Composite"); 
+}; 
+}; 
+ 
+b) Calculate the factorial of a positive number n given as input. 
+ 
+int n; 
+cin(n); 
+if( n<=1 ){ 
+cout( n ); 
+}else{ 
+int f; 
+f = 1; 
+while( n > 1){ 
+f = f * n; 
+n = n - 1; 
+}; 
+cout(f); 
+}; 
+ 
+ 
+
