@@ -72,7 +72,7 @@ IO-Statement ::= "cin(" Identifier ");" | "cout(" Identifier ");"
 If-Statement ::= "if(" Condition "){" Statement-List "}"  
 ["else{" Statement-List "}" ] ";" 
 While-Statement ::= "while(" Condition "){" Statement-List "};" 
-For-Statement ::= "for(" Condition "){" Statement-List "};" 
+For-Statement ::= "for((“;” " Condition " “;”){" Statement-List "};" 
 Condition ::= Expression Operation3 Expression ';' 
 Operation3 ::=  '<', '<=' , '==', '!=' , '>=', '>' , '&&', '||',  '!' 
 Struct-Statement ::= "struct" identifier '{' Declaration [Declaration] "};" 
