@@ -1,0 +1,182 @@
+My context free grammar is G=(N, Σ, P, A); 
+ 
+We have the following non-terminals : 
+
+N = { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V} 
+
+Starting symbol = A ∈ N 
+
+ 
+Let it be the following mapping of the non-terminals: 
+
+<Program> = A , <Statement-List> = B , <Statement> = C , <Declaration> = D 
+
+<Array-Declaration> = E , <Type> = F , <Identifier-List> = G , <Dimension> = H 
+
+<Size> = I , <Assignment> = J , <Expression> = K , <Term> = L 
+
+<Factor> = M , <Operation1> = N , <Operation2> = O 
+
+<IO-Statement> = P , <If-Statement> = Q , <While-Statement> = R , <For-Statement> = S 
+
+<Condition> = T , <Operation3> = U , <Struct-Statement> = V 
+
+Let this be the terminals: 
+
+Σ = { ' , " , ( , ) , { , } , [ , ]  , , , , , ; , = , b, d, l, o, p, r, s, t, w, if , else , while, for,  cin , cout , struct } 
+
+where: 
+
+d ∈ {0, 1, 2 , 3 , 4,  5, 6 , 7 , 8, 9} 
+
+b ∈ { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z } 
+
+l ∈ { a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z} 
+
+t ∈ { int, float , char, const, bool } 
+
+r ∈ {< , <= , == , != , >= , >} 
+
+o ∈ {&&, ||, ! } 
+
+p ∈ { * , / , ^ , %} 
+
+s ∈ { +, - } 
+
+ 
+
+Then this is P, the set of productions: 
+
+P = { 
+
+A -> B 
+
+B -> C ; | C ; B  
+
+C -> D | J | Q | R | V ;
+
+D -> F G ; E ;
+
+E -> F t[H] | F t[H] ,t[H] ;
+
+F -> t  
+
+G -> t | t,t
+
+H -> [I] | [I][I]
+
+I -> d 
+
+J -> t = K; 
+
+K -> K N L | L
+
+L -> L O M | M
+
+M -> (K) | t
+
+N -> s
+
+O -> p
+
+P -> cin(t); | cout(t); 
+
+Q -> if(T){B}; | if(T){B}else{B};
+
+R -> while(T){B}; 
+
+S -> for(;T;){B};
+
+T -> K U K;
+
+U -> r | o
+
+V -> struct t {D}; | struct t {D D};
+
+} 
+
+ 
+
+Based on this BNF specification made after the EBNF specification turned in for Lab 1: 
+
+ 
+
+Lab 1
+Exercise 1. 
+1.	Language Definition 
+a.	Alphabet: 
+i.	Upper case and lower case letters of the English alphabet: 
+'A' …'Z' and 'a' … 'z' 
+ii.	Decimal digits : '0' … '9' 
+iii.	Underline character : '_' 
+b.	Lexic: 
+i.	Special symbols representing: 
+1.	Operators :  
+a.	Arithmetic: '+' , '-' , '*' , '/' , '^', '%', '='   
+b.	Relational : '<', '<=' , '==', '!=' , '>=', '>'  
+c.	Logical : '&&', '||',  '!' 
+2.	Separators : '[' , ']', '{' , '}' , '(' , ')' , ';', ',' , ' ' (space) 
+3.	Reserved words: 'if', 'else', 'int', 'float', 'char', 'const' , 'while', 'bool’, ‘for’, ‘string’,’cin’,’cout’, ‘struct’
+ii.	Identifiers:s 
+Identifier::= L[C] 
+L ::= '_'|Letter 
+C ::= Letter|Digit 
+Letter ::= 'A'|'B'|…|'Z'|'a'|'b'|…|'z'| 
+Digit ::= '0'|'1'|…|'9'| 
+iii.	Constants: 
+1.	Integer Constants: 
+int const ::= ['+'|'-'] Digits 
+Digits ::= Digit|Nonzero-digit Digits 
+Nonzero-digit ::= '1'|'2'|…|'9'| 
+Digit ::= '0'|'1'|…|'9'| 
+2.	Floating Point (Real) Constants: 
+float const ::= ['+'|'-'] Digits '.' Digits 
+Digits ::= Digit|Nonzero-digit Digits 
+Digit ::= '0'|'1'|…|'9'| 
+3.	Character Constants: 
+char const := 'Letter'|'Digit' 
+Letter ::= 'A'|'B'|…|'Z'|'a'|'b'|…|'z'| 
+Digit ::= '0'|'1'|…|'9'| 
+4.	String Constants: 
+string const ::= "String" 
+String ::= C[String] 
+C::= Letter|Digit 
+Letter ::= 'A'|'B'|…|'Z'|'a'|'b'|…|'z'| 
+Digit ::= '0'|'1'|…|'9'| 
+
+
+
+
+
+
+2.	Syntax: 
+
+
+
+a.	Syntactical rules: 
+Program ::= Statement-List 
+Statement-List ::= Statement ";" | Statement ";" Statement-List 
+Statement ::= Declaration | Assignment | If-Statement | While-Statement  
+| Struct-Statement ';' 
+
+Declaration ::= Type Identifier-List ';' | Array-Declaration ';' 
+Array-Declaration ::= Type Identifier '['Dimension']' [','Identifier'['Dimension']'] ';' 
+Type ::= 'int'| 'string' | 'bool' ';' 
+Identifier-List ::= Identifier[',' Identifier] 
+Dimension ::= '[' size ']' | '[' size ']' [ '[' size ']' ] 
+Size ::= Digits 
+Assignment ::= Identifier '=' Expression ';' 
+Expression ::= Expression Operation1 Term | Term 
+Term ::= Term Operation2 Factor | Factor 
+Factor ::= '(' expression ')' | Identifier 
+Operation1 = '+' | '-' 
+Operation2 = '*' | '/'  | '%'  
+IO-Statement ::= "cin(" Identifier ");" | "cout(" Identifier ");" 
+If-Statement ::= "if(" Condition "){" Statement-List "}"  
+["else{" Statement-List "}" ] ";" 
+While-Statement ::= "while(" Condition "){" Statement-List "};" 
+For-Statement ::= "for(“;” " Condition " “;”){" Statement-List "};" 
+Condition ::= Expression Operation3 Expression ';' 
+Operation3 ::=  '<', '<=' , '==', '!=' , '>=', '>' , '&&', '||',  '!' 
+Struct-Statement ::= "struct" identifier '{' Declaration [Declaration] "};" 
+
